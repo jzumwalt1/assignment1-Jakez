@@ -1,7 +1,7 @@
 class PhoneBook
     def initialize
         @entries = {}
-        @listed_numbers = Set.new
+        @listed_numbers = []
     end
 
     def add(name, number, is_listed)
@@ -9,7 +9,7 @@ class PhoneBook
         if @entries.key?(name) then return false end
         unless number.match?(/[1-9]\d{2}-\d{3}-\d{4}/) then return false end
         if is_listed && @listed_numbers.include?(number) then return false end
-        if is_listed then @listed_numbers.add(number) end
+        if is_listed then @listed_numbers << number end
         @entries[name] = {number: number, is_listed: is_listed}
         return true
     end
